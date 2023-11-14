@@ -63,7 +63,6 @@ fn main() {
     };
 
     recon("127.0.0.1"); // Test recon on localhost
-    recon("45.33.32.156"); // Test recon on scanme.nmap.org
 
     let connections = String::from_utf8_lossy(&output.stdout);
     let mut shenanigans = false;
