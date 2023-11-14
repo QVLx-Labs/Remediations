@@ -1,0 +1,8 @@
+[package]
+name = "pyorust"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+regex = "1.10"
+netscan = "0.21"
