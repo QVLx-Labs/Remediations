@@ -6,3 +6,5 @@ edition = "2021"
 [dependencies]
 regex = "1.10"
 netscan = "0.21"
+pnet = "0.34"
+dns-lookup = "2.0.4"
