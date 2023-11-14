@@ -1,15 +1,16 @@
-#$t@$h
+// $t@$h
 
 use std::process::{Command};
 use std::fs;
 use std::path::Path;
 use std::time::{SystemTime, Duration};
 use std::net::IpAddr;
-use netscan::host::HostInfo;
+use netscan::host::{HostInfo, PortStatus};
 use netscan::scanner::PortScanner;
 use netscan::setting::ScanType;
-use netscan::host::PortStatus;
 use regex::Regex;
+use pnet::datalink;
+use dns_lookup::lookup_host;
 
 fn main() {
     println!("Scanning for pyobfgood...");
@@ -61,10 +62,13 @@ fn main() {
         }
     };
 
+    recon("127.0.0.1"); // Test recon on localhost
+    recon("45.33.32.156"); // Test recon on scanme.nmap.org
+
     let connections = String::from_utf8_lossy(&output.stdout);
     let mut shenanigans = false;
     let mut suspicious_ips = Vec::new();
-    let ip_regex = Regex::new(r"(?P<ip>\d{1,3}(\.\d{1,3}){3})").unwrap();
+    let ip_regex = Regex::new(r"(?P<ip>\d{1,3}(\.\d{1,3}){3}):").unwrap();
 
     for server in flagged_servers.iter() {
         if connections.contains(server) {
@@ -83,9 +87,6 @@ fn main() {
 
     if !shenanigans { println!("No suspicious connections found."); }
     else { for ip in suspicious_ips { recon(&ip); } }
-
-    // Test recon on scanme.nmap.org
-    // recon("45.33.32.156");
 
     // Monitor CPU
     println!("Monitoring CPU activity for potential shenanigans...");
@@ -135,9 +136,13 @@ fn main() {
 }
 
 fn recon(ip_str: &str) {
-    println!("Performing offensive recon.");
+    println!("Performing offensive recon on: {}", ip_str);
+    let interfaces = datalink::interfaces();
+    let interface = interfaces.into_iter()
+                              .find(|iface| iface.is_up() && !iface.ips.is_empty())
+                              .expect("No net interface found.");
+    let ip = interface.ips[0].ip();
 
-    let ip: IpAddr = ip_str.parse().expect("Invalid IP address");
     let mut port_scanner = PortScanner::new(ip).expect("Error creating port scanner");
     let target: HostInfo = HostInfo::new_with_ip_addr(ip).with_ports(vec![22,    // SSH
                                                                           80,    // HTTP
