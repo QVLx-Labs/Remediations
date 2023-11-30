@@ -1,3 +1,6 @@
+// $t@$h
+// BlueNoroff detection and quarantine. MacOS only
+// !!!Warning: This script DOES affect your system. Puts suspicious files in jail.
 import Foundation
 import CryptoKit
 
@@ -41,9 +44,7 @@ class BlueNoroffRemediation {
     for directory in directoriesToScan {
       do {
         let fileURLs = try FileManager.default.contentsOfDirectory(at: URL(fileURLWithPath: directory), includingPropertiesForKeys: nil)
-        for fileURL in fileURLs {
-          checkFile(at: fileURL)
-        }
+        for fileURL in fileURLs { checkFile(at: fileURL) }
       } catch {
         findings.append("Error scanning directory \(directory): \(error)")
       }
@@ -53,9 +54,7 @@ class BlueNoroffRemediation {
   // Check file for IoCs
   func checkFile(at url: URL) {
     if let fileHash = hashOfFile(at: url) {
-      if maliciousHashes.contains(fileHash) {
-        quarantineItem(itemPath: url.path)
-      }
+      if maliciousHashes.contains(fileHash) { quarantineItem(itemPath: url.path) }
     }
 
     if let fileContent = try? String(contentsOf: url, encoding: .utf8) {
@@ -83,9 +82,7 @@ class BlueNoroffRemediation {
     var context = SHA256()
     while inputStream.hasBytesAvailable {
       let read = inputStream.read(buffer, maxLength: 1024)
-      if read > 0 {
-        context.update(data: Data(bytes: buffer, count: read))
-      }
+      if read > 0 { context.update(data: Data(bytes: buffer, count: read)) }
     }
     let digest = context.finalize()
     return digest.compactMap { String(format: "%02x", $0) }.joined()
