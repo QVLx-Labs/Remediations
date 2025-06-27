@@ -67,4 +67,4 @@ else
   echo "JVM flags already present in $PROFILE"
 fi
 
-echo "Solr successfully hardened against CVE‑2021‑44228"
+echo "Solr hardened against CVE‑2021‑44228"
