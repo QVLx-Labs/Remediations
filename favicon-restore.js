@@ -1,5 +1,10 @@
 // Author: $t@$h
+//
 // This goes with this detection: https://github.com/STashakkori/MalwareDetection/tree/main/FaviconBeacon
+//
+// Can also mitigate caching while keeping the favicon stealthy and this also effectively patches against steg:
+//   https://github.com/STashakkori/Obfuscators/blob/main/favicon-mutator.js
+//
 // Also see this tested APT proof-of-concept: https://github.com/STashakkori/Favicon-Stegostealth
 // When tamper is detected, run this functon below to patch:
 
