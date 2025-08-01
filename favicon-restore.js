@@ -94,6 +94,19 @@ const FaviconRestorer = (() => {
 // You can run it like so:
 //   FaviconRestorer.restore();
 
+/* Timing is important (blob needs to be available), so include after DOM load:
+  <script>
+    window.addEventListener("DOMContentLoaded", () => {
+      if (window.FaviconBeacon) {
+        FaviconBeacon.arm();
+        FaviconBeacon.startWatch();
+      } else {
+        console.error("FaviconBeacon is still undefined");
+      }
+    });
+  </script>
+*/
+
 // Tested and works:
 /*
   [FaviconBeacon] Watchdog started
