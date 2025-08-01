@@ -3,7 +3,7 @@
 // Also see this tested APT proof-of-concept: https://github.com/STashakkori/Favicon-Stegostealth
 // When tamper is detected, run this functon below to patch:
 
-// restoreGolden — Manually restores the golden known-good favicon
+// Manually restores the golden known-good favicon
 const FaviconRestorer = (() => {
   // Fetches an image from the given URL, bypassing cache, and returns an HTMLImageElement
   const fetchImage = async (url) => {
@@ -88,3 +88,44 @@ const FaviconRestorer = (() => {
 
 // You can run it like so:
 //   FaviconRestorer.restore();
+
+// Tested and works:
+/*
+  [FaviconBeacon] Watchdog started
+  favicon-hamming.js:38 [FaviconBeacon] First 16 pixels: (64) [0, 128, 0, 255, 0, 128, 0, 255, 0, 128, 0, 255, 0, 128, 0, 255, 0, 128, 0, 255, 0, 128, 0, 255, 0, 128, 0, 255, 0, 128, 0, 255, 0, 128, 0, 255, 0, 128, 0, 255, 0, 128, 0, 255, 0, 128, 0, 255, 0, 128, 0, 255, 0, 128, 0, 255, 0, 128, 0, 255, 0, 128, 0, 255]
+  favicon-hamming.js:117 [FaviconBeacon] Current hash: 1754775552
+  favicon-hamming.js:122 [FaviconBeacon] Baseline hash recorded: 1754775552
+  favicon-hamming.js:38 [FaviconBeacon] First 16 pixels: (64) [0, 128, 0, 255, 0, 128, 0, 255, 0, 128, 0, 255, 0, 128, 0, 255, 0, 128, 0, 255, 0, 128, 0, 255, 0, 128, 0, 255, 0, 128, 0, 255, 0, 128, 0, 255, 0, 128, 0, 255, 0, 128, 0, 255, 0, 128, 0, 255, 0, 128, 0, 255, 0, 128, 0, 255, 0, 128, 0, 255, 0, 128, 0, 255]
+  favicon-hamming.js:117 [FaviconBeacon] Current hash: 1754775552
+  favicon-hamming.js:128 [FaviconBeacon] Favicon verified.
+  favicon-hamming.js:38 [FaviconBeacon] First 16 pixels: (64) [0, 128, 0, 255, 0, 128, 0, 255, 0, 128, 0, 255, 0, 128, 0, 255, 0, 128, 0, 255, 0, 128, 0, 255, 0, 128, 0, 255, 0, 128, 0, 255, 0, 128, 0, 255, 0, 128, 0, 255, 0, 128, 0, 255, 0, 128, 0, 255, 0, 128, 0, 255, 0, 128, 0, 255, 0, 128, 0, 255, 0, 128, 0, 255]
+  favicon-hamming.js:117 [FaviconBeacon] Current hash: 1754775552
+  favicon-hamming.js:128 [FaviconBeacon] Favicon verified.
+  document.querySelector("link[rel~='icon']").href = "/favicon4.png";
+  '/favicon4.png'
+  favicon-hamming.js:38 [FaviconBeacon] First 16 pixels: (64) [0, 128, 0, 254, 0, 128, 0, 254, 0, 128, 0, 254, 0, 128, 0, 254, 0, 128, 0, 254, 0, 128, 0, 254, 0, 128, 0, 254, 0, 128, 0, 254, 0, 128, 0, 254, 0, 128, 0, 255, 0, 128, 0, 254, 0, 128, 0, 255, 0, 128, 0, 255, 0, 128, 0, 255, 0, 128, 0, 255, 0, 128, 0, 254]
+  favicon-hamming.js:117 [FaviconBeacon] Current hash: 148765988
+  favicon-hamming.js:125  [FaviconBeacon] Favicon hash mismatch! Possible APT/tampering.
+  checkFaviconIntegrity @ favicon-hamming.js:125
+  await in checkFaviconIntegrity
+  (anonymous) @ favicon-hamming.js:154
+  setInterval
+  startWatch @ favicon-hamming.js:153
+  (anonymous) @ mitigation-test:15
+  favicon-hamming.js:155  [FaviconBeacon] ALERT: Favicon tampering detected.
+  (anonymous) @ favicon-hamming.js:155
+  setInterval
+  startWatch @ favicon-hamming.js:153
+  (anonymous) @ mitigation-test:15
+  [NEW] Explain Console errors by using Copilot in Edge: click
+           
+           to explain an error. 
+          Learn more
+          Don't show again
+  FaviconRestorer.restore();
+  Promise {<pending>}
+  favicon-restore.js:66 [FaviconRestorer] Favicon restored.
+  favicon-hamming.js:38 [FaviconBeacon] First 16 pixels: (64) [0, 128, 0, 255, 0, 128, 0, 255, 0, 128, 0, 255, 0, 128, 0, 255, 0, 128, 0, 255, 0, 128, 0, 255, 0, 128, 0, 255, 0, 128, 0, 255, 0, 128, 0, 255, 0, 128, 0, 255, 0, 128, 0, 255, 0, 128, 0, 255, 0, 128, 0, 255, 0, 128, 0, 255, 0, 128, 0, 255, 0, 128, 0, 255]
+  favicon-hamming.js:117 [FaviconBeacon] Current hash: 1754775552
+  favicon-hamming.js:128 [FaviconBeacon] Favicon verified.
+*/
