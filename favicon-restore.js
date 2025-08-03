@@ -87,8 +87,9 @@ const FaviconRestorer = (() => {
     updateFavicon(canvas);
   };
 
-  // Expose public API, no auto-run
-  return { restore };
+  // Expose public API
+  const FaviconRestorer = { restore };
+  export { FaviconRestorer };
 })();
 
 // You can run it like so:
