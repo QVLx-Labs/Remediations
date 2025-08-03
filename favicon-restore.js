@@ -88,8 +88,7 @@ const FaviconRestorer = (() => {
   };
 
   // Expose public API
-  const FaviconRestorer = { restore };
-  export { FaviconRestorer };
+  return { restore };
 })();
 
 // You can run it like so:
