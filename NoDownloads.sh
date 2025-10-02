@@ -1,5 +1,6 @@
 #!/bin/bash
-#$t@$h
+
+# $t@$h
 
 # This script removes binaries that can result a file download.
 
