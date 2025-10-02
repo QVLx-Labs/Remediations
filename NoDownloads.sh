@@ -1,9 +1,13 @@
 #!/bin/bash
 #$t@$h
+
 # This script removes binaries that can result a file download.
+
 # It DOES modify your system. Run as root and use with caution.
-# Have added a lock and unlock feature:
+
+# (UPDATE) Have added a lock and unlock feature:
 # Usage: ./NoDownloads.sh [lock || unlock]
+
 BACKUP_DIR="/var/lib/binary_locker"
 BACKUP_ZIP="$BACKUP_DIR/binaries.zip"
 TMP_RESTORE_DIR="/tmp/binary_restore"
